@@ -10,14 +10,23 @@ client.login(config.discord_token)
 
 client.on("message", msg => {
     if (msg.content.startsWith("!julmoji")) {
-        emojis = twemoji.parse(msg.content.split(" ")[1])
+        let emoji = msg.content.split(" ")[1]
+        emojis = twemoji.parse(emoji)
+
         try {
-            let emojiLink = emojis[0].url
+            let emojiLink
+            if (emoji.startsWith("<:")) {
+                emojiLink = msg.guild.emojis.find((element) => {
+                    return emoji.search(element.id) != -1
+                }).url
+            } else {
+                emojiLink = emojis[0].url
+            }
 
             https.get(emojiLink, (response) => {
                 let data = []
                 response.on('data', function(chunk) {
-                    data.push(chunk);
+                    data.push(chunk)
                 }).on('end', function() {
                     let buffer = Buffer.concat(data);
                     
@@ -39,6 +48,7 @@ client.on("message", msg => {
             });
 
         } catch(err) {
+            console.log(err)
             msg.channel.send("Une erreur est survenue !")
         }
     }
