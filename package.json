@@ -9,7 +9,10 @@
   "author": "yopaman",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
+    "got": "^10.6.0",
+    "markov-strings": "^2.1.0",
     "sharp": "^0.23.2",
     "twemoji-parser": "^12.1.0"
   }
