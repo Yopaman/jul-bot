@@ -57,9 +57,16 @@ client.on("message", msg => {
             msg.channel.send("Une erreur est survenue !")
         }
     } else if (msg.content.startsWith("!julparoles")) {
-        i = 0,
+        /*i = 0,
         data = []
-        processPage(msg)
+        processPage(msg)*/
+        msg.reply("Commande desactivée pour le moment.")
+    } else if (msg.content.startsWith("!channelvideo")) {
+        if (msg.member.voiceChannel) {
+            msg.reply("http://discordapp.com/channels/" + msg.guild.id.toString() + "/" + msg.member.voiceChannel.id.toString())
+        } else {
+            msg.reply("Vous devez être connecté dans un channel vocal.")
+        }
     }
 })
 
